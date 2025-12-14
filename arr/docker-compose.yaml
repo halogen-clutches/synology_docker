@@ -16,7 +16,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Sonarr
-      - flame.url=https://sonarr.thechangcuellos.com
+      - flame.url=[[flame-url]]
       - flame.icon=koala
 
   radarr:
@@ -35,7 +35,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Radarr
-      - flame.url=https://radarr.thechangcuellos.com
+      - flame.url=[[flame-url]]
       - flame.icon=sheep
    
   bazarr:

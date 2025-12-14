@@ -1,0 +1,21 @@
+services:
+  convertx:
+    image: ghcr.io/c4illin/convertx:latest
+    container_name: convertx
+    restart: unless-stopped
+    ports:
+      - "8521:3000"
+    environment:
+      - TZ=America/New_York
+      - PGID=100
+      - PUID=1028
+      - JWT_SECRET=[JWT_SECRET]
+      - HTTP_ALLOWED=true # uncomment this if accessing it over a non-https connection
+      - ALLOW_UNAUTHENTICATED=true
+    volumes:
+      - /volume1/docker/convertx/data:/data
+    labels:
+      - flame.type=application
+      - flame.name=ConvertX
+      - flame.url=[[flame_url]]
+      - flame.icon=bee

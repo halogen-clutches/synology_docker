@@ -1,0 +1,19 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    ports:
+      - '9632:8080'
+    environment:
+      - TZ=America/New_York
+      - PGID=100
+      - PUID=1028
+      - DISABLE_ADDITIONAL_FEATURES=true
+    volumes:
+      - /volume1/docker/stirling-pdf/configs:/configs
+    restart: unless-stopped
+    labels:
+      - flame.type=application
+      - flame.name=Stirling-PDF
+      - flame.url=https://pdf.thechangcuellos.com
+      - flame.icon=turkey

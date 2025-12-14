@@ -1,0 +1,21 @@
+version: "3"
+services:
+  komga:
+    container_name: komga
+    image: gotson/komga:latest
+    environment:
+      - TZ=America/Denver
+      - GUID=100
+      - PUID=1028
+    volumes:
+      - /volume1/data/library/Manga:/manga:rw
+      - /volume1/docker/komga/config:/config:rw
+      - /volume1/docker/komga/data:/data:rw
+    ports:
+      - 25600:25600
+    restart: always
+    labels:
+      - flame.type=application
+      - flame.name=Komga
+      - flame.url=[[flame_url]]
+      - flame.icon=dog

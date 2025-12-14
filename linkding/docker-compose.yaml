@@ -1,0 +1,25 @@
+services:
+  linkding:
+    container_name: linkding
+    image: sissbruecker/linkding:latest
+    ports:
+      - 6567:9090
+    volumes:
+      - /volume1/docker/linkding:/etc/linkding/data
+    environment:
+      - TZ=America/New_York
+      - LD_CONTAINER_NAME=linkding
+      - LD_HOST_PORT=9090
+      - LD_HOST_DATA_DIR=/volume1/docker/linkding/data
+      - LD_SUPERUSER_NAME=[[super_user]]
+      - LD_SUPERUSER_PASSWORD=[[password]]
+      - LD_DISABLE_BACKGROUND_TASKS=False
+      - LD_DISABLE_URL_VALIDATION=False
+      - LD_ENABLE_AUTH_PROXY=False
+      - LD_DB_ENGINE=sqlite
+    restart: unless-stopped
+    labels:
+      - flame.type=application
+      - flame.name=Linkding
+      - flame.url=[[flame_url]]
+      - flame.icon=penguin
