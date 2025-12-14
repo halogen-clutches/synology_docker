@@ -8,3 +8,4 @@ services:
     healthcheck:
       test: curl -f http://localhost:3033 || exit 1
     restart: unless-stopped
+    testing: true
