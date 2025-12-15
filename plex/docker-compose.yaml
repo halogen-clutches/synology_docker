@@ -4,7 +4,7 @@ services:
     container_name: plex-media-server
     image: plexinc/pms-docker:latest
     environment:
-      - TZ=America/New_York
+      - TZ
       - PLEX_GID=100
       - PLEX_UID=1028 
     volumes:
@@ -17,5 +17,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Plex
-      - flame.url=[[flame_url]]
+      - flame.url=${FLAME_URL}
       - flame.icon=cat
