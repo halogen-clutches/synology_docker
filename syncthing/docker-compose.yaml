@@ -14,7 +14,7 @@ services:
       - /volume1/docker/syncthing/data1:/data1
       - /volume1/data/seedbox_downloads:/seedbox_downloads:rw
     ports:
-      - ${HOST_PORT}:${CONTAINER_PORT}
+      - ${HOST_PORT}:8384
       - 22000:22000/tcp
       - 22000:22000/udp
       - 21027:21027/udp
@@ -24,3 +24,4 @@ services:
       - flame.name=Syncthing
       - flame.url=${FLAME_URL}
       - flame.icon=cow
+
