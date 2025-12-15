@@ -4,9 +4,9 @@ services:
     ports:
       - 9588:3033
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/location.env
     environment:
-      - TZ
+      - TZ=${TZ}
     volumes:
       - /volume1/docker/yt-dlp-webui:/downloads 
     healthcheck:
