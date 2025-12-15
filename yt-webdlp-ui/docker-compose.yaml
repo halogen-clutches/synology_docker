@@ -3,6 +3,10 @@ services:
     image: marcobaobao/yt-dlp-webui
     ports:
       - 9588:3033
+    env_file:
+      - /volume1/docker/location.env
+    environment:
+      - TZ
     volumes:
       - /volume1/docker/yt-dlp-webui:/downloads 
     healthcheck:
