@@ -6,7 +6,7 @@ services:
     env_file:
       - /volume1/docker/komodo/periphery/location.env
     environment:
-      - TZ
+      - TZ=${TZ}
     volumes:
       - /volume1/docker/yt-dlp-webui:/downloads 
     healthcheck:
