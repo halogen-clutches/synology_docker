@@ -80,5 +80,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Sabnzbd
-      - flame.url${SABNZBD_FLAME_URL}
+      - flame.url=${SABNZBD_FLAME_URL}
       - flame.icon=tortoise
