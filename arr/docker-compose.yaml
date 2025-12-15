@@ -22,10 +22,12 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    env_file:
+      - /volume1/docker/location.env
     environment:
-      - TZ=America/New_York
-      - GUID=[[GUID]]
-      - PUID=[[PUID]]
+      - TZ=${TZ}
+      - GUID=100
+      - PUID=1028
     volumes:
       - /volume1/docker/radarr/config:/config
       - /volume1/data:/data
@@ -41,10 +43,12 @@ services:
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
+    env_file:
+      - /volume1/docker/location.env
     environment:
-      - TZ=America/New_York
-      - GUID=[[GUID]]
-      - PUID=[[PUID]]
+      - TZ=${TZ}
+      - GUID=100
+      - PUID=1028
     volumes:
       - /volume1/docker/bazarr/config:/config
       - /volume1/data:/data
@@ -59,10 +63,12 @@ services:
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
+    env_file:
+      - /volume1/docker/location.env
     environment:
-      - TZ=America/New_York
-      - PGID=[[PGID]]
-      - PUID=[[PUID]]
+      - TZ=${TZ}
+      - PGID=100
+      - PUID=1028
     volumes:
       - /volume1/docker/sabnzbd/config:/config
       - /volume1/data/usenet_downloads/incomplete:/incomplete_downloads # optional

@@ -3,17 +3,19 @@ services:
     image: ghcr.io/c4illin/convertx:latest
     container_name: convertx
     restart: unless-stopped
-    ports:
-      - "8521:3000"
+    env_file:
+      - /volume1/docker/location.env
     environment:
-      - TZ=America/New_York
+      - TZ=${TZ}
       - PGID=100
       - PUID=1028
-      - JWT_SECRET=[JWT_SECRET]
+      - JWT_SECRET=${JWT_SECRET}
       - HTTP_ALLOWED=true # uncomment this if accessing it over a non-https connection
       - ALLOW_UNAUTHENTICATED=true
     volumes:
       - /volume1/docker/convertx/data:/data
+    ports:
+      - ${HOST_PORT}:3000
     labels:
       - flame.type=application
       - flame.name=ConvertX

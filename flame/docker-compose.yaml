@@ -7,7 +7,7 @@ services:
       - /volume1/docker/flame/config:/app/data
       - /var/run/docker.sock:/var/run/docker.sock # optional but required for Docker integration feature
     ports:
-      - 5005:5005
+      - ${HOST_PORT}:5005
     secrets:
       - password 
     environment:
@@ -16,7 +16,7 @@ services:
     labels:
       - flame.type=application
       - flame.name=Flame
-      - flame.url=[[flame-url]]
+      - flame.url=${FLAME_URL}
       - flame.icon=fishbowl-outline
 secrets:
   password:

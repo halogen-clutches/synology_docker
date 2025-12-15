@@ -4,7 +4,7 @@ services:
     container_name: komga
     image: gotson/komga:latest
     environment:
-      - TZ=America/Denver
+      - TZ=${TZ}
       - GUID=100
       - PUID=1028
     volumes:
@@ -12,10 +12,10 @@ services:
       - /volume1/docker/komga/config:/config:rw
       - /volume1/docker/komga/data:/data:rw
     ports:
-      - 25600:25600
+      - ${HOST_PORT}:25600
     restart: always
     labels:
       - flame.type=application
       - flame.name=Komga
-      - flame.url=[[flame_url]]
+      - flame.url=${FLAME_URL}
       - flame.icon=dog

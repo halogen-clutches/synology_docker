@@ -3,8 +3,10 @@ services:
   plex-media-server:
     container_name: plex-media-server
     image: plexinc/pms-docker:latest
+    env_file:
+      - /volume1/docker/location.env
     environment:
-      - TZ
+      - TZ=${TZ}
       - PLEX_GID=100
       - PLEX_UID=1028 
     volumes:

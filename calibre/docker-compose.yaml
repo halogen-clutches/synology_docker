@@ -8,10 +8,12 @@ services:
   calibre:
     container_name: calibre
     image: linuxserver/calibre:latest
+    env_file:
+      - /volume1/docker/location.env
     environment:
-      - TZ=America/New_York
-      - PGID=[[PGID]]
-      - PUID=[[PUID]]
+      - TZ=${TZ}
+      - PGID=100
+      - PUID=1028
     volumes:
       - /volume1/data/library/Books:/data/library/Books
       - /volume1/docker/calibre/upload:/upload:rw
@@ -24,16 +26,18 @@ services:
     labels:
       - flame.type=application
       - flame.name=Calibre
-      - flame.url=[[flame-url]]
+      - flame.url=${CALIBRE_FLAME_URL}
       - flame.icon=dog
       
   calibre-web:
     container_name: calibre-web 
     image: linuxserver/calibre-web:latest
+    env_file:
+      - /voluem1/docker/location.env
     environment:
-      - TZ=America/New_York
-      - PGID=[[PGID]]
-      - PUID=[[PUID]]
+      - TZ=${TZ}
+      - PGID=100
+      - PUID=1028
       - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:calibre-web|lscr.io/linuxserver/mods:universal-calibre-v7.16.0
       - TP_THEME=maroon
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1
@@ -47,5 +51,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Calibre-Web
-      - flame.url=[[flame-url]]
+      - flame.url=${CALIBRE_WEB_FLAME_URL}
       - flame.icon=rabbit

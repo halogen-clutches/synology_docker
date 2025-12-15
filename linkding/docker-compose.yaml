@@ -2,8 +2,8 @@ services:
   linkding:
     container_name: linkding
     image: sissbruecker/linkding:latest
-    volumes:
-      - /volume1/docker/linkding:/etc/linkding/data
+    env_file:
+      - /volume1/docker/location.env
     environment:
       - TZ
       - LD_CONTAINER_NAME=linkding
@@ -15,6 +15,8 @@ services:
       - LD_DISABLE_URL_VALIDATION=False
       - LD_ENABLE_AUTH_PROXY=False
       - LD_DB_ENGINE=sqlite
+    volumes:
+      - /volume1/docker/linkding:/etc/linkding/data
     ports:
       - ${HOST_PORT}:9090
     restart: unless-stopped
