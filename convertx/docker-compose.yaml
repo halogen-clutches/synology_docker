@@ -4,7 +4,7 @@ services:
     container_name: convertx
     restart: unless-stopped
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - PGID=100

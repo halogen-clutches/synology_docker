@@ -1,0 +1,21 @@
+services:
+  metube:
+    image: ghcr.io/alexta69/metube
+    container_name: metube
+    env_file:
+      - /volume1/docker/komodo/periphery/location.env
+    environment:
+      - TZ=${TZ}
+      - PGID=100
+      - PUID=1028
+      - 'YTDL_OPTIONS={"trim_file_name":15}'
+    volumes:
+      - /volume1/docker/metube/downloads:/downloads
+    ports:
+      - ${HOST_PORT}:8081
+    restart: unless-stopped
+    labels:
+      - flame.type=application
+      - flame.name=MeTube
+      - flame.url=${FLAME_URL}
+      - flame.icon=butterfly

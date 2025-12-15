@@ -3,27 +3,28 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    env_file:
+      - /volume1/docker/komodo/periphery/location.env
     environment:
-      - TZ=America/New_York
-      - GUID=[[GUID]]
-      - PUID=[[PUID]]
+      - TZ=${TZ}
+      - GUID=100
+      - PUID=1028
     volumes:
       - /volume1/docker/sonarr/config:/config
       - /volume1/data:/data
     ports:
-      - 8989:8989
+      - ${SONARR_HOST_PORT}:8989
     restart: unless-stopped
     labels:
       - flame.type=application
       - flame.name=Sonarr
-      - flame.url=[[flame-url]]
+      - flame.url=${SONARR_FLAME_URL}
       - flame.icon=koala
-
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - GUID=100
@@ -32,19 +33,18 @@ services:
       - /volume1/docker/radarr/config:/config
       - /volume1/data:/data
     ports:
-      - 7878:7878
+      - ${RADARR_HOST_PORT}:7878
     restart: unless-stopped
     labels:
       - flame.type=application
       - flame.name=Radarr
-      - flame.url=[[flame-url]]
+      - flame.url=${RADARR_FLAME_URL}
       - flame.icon=sheep
-   
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - GUID=100
@@ -53,18 +53,18 @@ services:
       - /volume1/docker/bazarr/config:/config
       - /volume1/data:/data
     ports:
-      - 6767:6767
+      - ${BAZARR_HOST_PORT}:6767
     restart: unless-stopped
     labels:
       - flame.type=application
       - flame.name=Bazarr
-      - flame.url=https://bazarr.thechangcuellos.com
+      - flame.url=${BAZARR_FLAME_URL}
       - flame.icon=owl
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - PGID=100
@@ -74,11 +74,11 @@ services:
       - /volume1/data/usenet_downloads/incomplete:/incomplete_downloads # optional
       - /volume1/data/usenet_downloads:/usenet_downloads #optional
     ports:
-      - 8777:8080
+      - ${SABNZBD_HOST_PORT}:8080
       - 9090:9090
     restart: unless-stopped
     labels:
       - flame.type=application
       - flame.name=Sabnzbd
-      - flame.url=[[flame-url]]
+      - flame.url${SABNZBD_FLAME_URL}
       - flame.icon=tortoise

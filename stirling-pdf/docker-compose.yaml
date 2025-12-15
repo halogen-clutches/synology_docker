@@ -3,7 +3,7 @@ services:
     image: stirlingtools/stirling-pdf:latest
     container_name: stirling-pdf
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - PGID=100

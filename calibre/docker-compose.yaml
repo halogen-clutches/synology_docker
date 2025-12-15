@@ -9,7 +9,7 @@ services:
     container_name: calibre
     image: linuxserver/calibre:latest
     env_file:
-      - /volume1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - PGID=100
@@ -33,7 +33,7 @@ services:
     container_name: calibre-web 
     image: linuxserver/calibre-web:latest
     env_file:
-      - /voluem1/docker/location.env
+      - /volume1/docker/komodo/periphery/location.env
     environment:
       - TZ=${TZ}
       - PGID=100
