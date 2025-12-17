@@ -3,6 +3,8 @@ services:
   komga:
     container_name: komga
     image: gotson/komga:latest
+    env_file:
+      - ../location.env
     environment:
       - TZ=${TZ}
       - GUID=100
