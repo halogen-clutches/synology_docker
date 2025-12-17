@@ -9,19 +9,20 @@ services:
     container_name: calibre
     image: linuxserver/calibre:latest
     env_file:
-      - /volume1/docker/komodo/periphery/location.env
+      - ../location.env
     environment:
       - TZ=${TZ}
       - PGID=100
       - PUID=1028
+      - PASSWORD=${CALIBRE_PASSWORD}
     volumes:
       - /volume1/data/library/Books:/data/library/Books
       - /volume1/docker/calibre/upload:/upload:rw
       - /volume1/docker/calibre/plugins:/plugins:rw
       - /volume1/docker/calibre/config:/config:rw
     ports:
-      - 24880:8080
-      - 24881:8081
+      - ${CALIBRE_HOST_PORT_8080}:8080
+      - ${CALIBRE_HOST_PORT_8081}:8081
     restart: always
     labels:
       - flame.type=application
@@ -33,7 +34,7 @@ services:
     container_name: calibre-web 
     image: linuxserver/calibre-web:latest
     env_file:
-      - /volume1/docker/komodo/periphery/location.env
+      - ../location.env
     environment:
       - TZ=${TZ}
       - PGID=100
@@ -46,7 +47,7 @@ services:
       - /volume1/docker/calibre-web/config:/config:rw
       - /volume1/docker/calibre-web/custom-files:/custom-cont-init.d:ro
     ports:
-      - 8083:8083
+      - ${CALIBRE_WEB_HOST_PORT}:8083
     restart: always
     labels:
       - flame.type=application
