@@ -45,7 +45,6 @@ services:
     volumes:
       - /volume1/data/library/Books:/books:rw
       - /volume1/docker/calibre-web/config:/config:rw
-      - /volume1/docker/calibre-web/custom-files:/custom-cont-init.d:ro
     ports:
       - ${CALIBRE_WEB_HOST_PORT}:8083
     restart: always
