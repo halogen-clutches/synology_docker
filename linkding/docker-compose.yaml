@@ -3,9 +3,9 @@ services:
     container_name: linkding
     image: sissbruecker/linkding:latest
     env_file:
-      - /volume1/docker/komodo/periphery/location.env
+      - ../location.env
     environment:
-      - TZ
+      - TZ=${TZ}
       - LD_CONTAINER_NAME=linkding
       - LD_HOST_PORT=9090
       - LD_HOST_DATA_DIR=/volume1/docker/linkding/data
