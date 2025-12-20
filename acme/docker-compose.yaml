@@ -6,11 +6,20 @@ services:
     volumes:
       - /volume1/docker/acme:/acme.sh
     environment:            
-      - DNS_API="dns_gd"
-      - DOMAIN_NAME=$ACME_DOMAIN
-      - ACME_SH_EMAIL=$ACME_EMAIL
+      - DNS_API=${ACME_DNS_API}
+      - DOMAIN_NAME=${ACME_DOMAIN}
+      - ACME_SH_EMAIL=${ACME_EMAIL}
     command: sh /acme.sh/acme.sh-docker.sh
 
 # cheerfully lifted from: https://gist.github.com/williamdes/a8f15c7acaa71cd4437c4a903784f0e1
-# add weekly Task Scheduler command: `docker exec acme --cron --insecure --home /acme.sh`
+# add weekly Task Scheduler command: 
 # --insecure flag for deploying to Synology
+
+# Script: 
+#!/bin/bash
+
+# # Step 1: Run acme.sh cron for auto-renewal
+# docker exec acme acme.sh --cron --home /acme.sh --insecure
+
+# # Step 2: Force deploy to DSM regardless
+# docker exec acme acme.sh --deploy \
