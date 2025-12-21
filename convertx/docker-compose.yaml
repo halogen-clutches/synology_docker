@@ -19,5 +19,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=ConvertX
-      - flame.url=[[flame_url]]
+      - flame.url=${FLAME_URL}
       - flame.icon=bee
