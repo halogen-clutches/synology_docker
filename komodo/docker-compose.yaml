@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  #un-comment this to backup the latest folder
+  #un-comment this to restore the latest folder
   #cli:
   #  image: ghcr.io/moghtech/komodo-cli
   #  ## Optionally specify a specific folder with `--restore-folder`,
@@ -68,3 +68,4 @@ services:
       - ${PERIPHERY_ROOT_DIRECTORY}:${PERIPHERY_ROOT_DIRECTORY}
     env_file:
       - ./.env
+
