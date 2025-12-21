@@ -4,7 +4,7 @@ services:
     container_name: syncthing
     image: lscr.io/linuxserver/syncthing:latest
     env_file:
-      - /volume1/docker/komodo/periphery/location.env
+      - ../location.env
     environment:
       - PGID=100
       - PUID=1028
@@ -24,4 +24,5 @@ services:
       - flame.name=Syncthing
       - flame.url=${FLAME_URL}
       - flame.icon=cow
+
 
