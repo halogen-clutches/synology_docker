@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  #un-comment this to backup the latest folder
+  #cli:
+  #  image: ghcr.io/moghtech/komodo-cli
+  #  ## Optionally specify a specific folder with `--restore-folder`,
+  #  ## otherwise restores the most recent backup.
+  #  command: km database restore -y # --restore-folder 2025-08-14_03-00-01
+  #  volumes:
+  #    # Same mount to backup files as above
+  #    - /volume1/docker/komodo/backups:/backups
+  #  environment:
+  #    ## Database port must be reachable.
+  #    ## Note the different env vars needed compared to backup.
+  #    ## This is to prevent any accidental restores.
+  #    KOMODO_CLI_DATABASE_TARGET_ADDRESS: ferretdb:${FERRETDB_CONTAINER_PORT}
+  #    KOMODO_CLI_DATABASE_TARGET_USERNAME: ${KOMODO_DATABASE_USERNAME}
+  #    KOMODO_CLI_DATABASE_TARGET_PASSWORD: ${KOMODO_DATABASE_PASSWORD}
+  #    KOMODO_CLI_DATABASE_TARGET_DB_NAME: komodo
+  postgres:
+    # set to a specific version. Updates can be breaking.
+    # https://github.com/FerretDB/documentdb/pkgs/container/postgres-documentdb
+    image: ghcr.io/ferretdb/postgres-documentdb:17
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    restart: unless-stopped
+    ports:
+      - "${POSTGRESDB_HOST_PORT}:${POSTGRESDB_CONTAINER_PORT}"
+    volumes:
+      - /volume1/docker/postgres/data:/var/lib/postgresql/data
+  ferretdb:
+    user: "1028:100"
+    # ߚ蠐in to a specific version. Updates can be breaking.
+    # https://github.com/FerretDB/FerretDB/pkgs/container/ferretdb
+    image: ghcr.io/ferretdb/ferretdb:2.7
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "${FERRETDB_HOST_PORT}:${FERRETDB_CONTAINER_PORT}"
+    volumes:
+      - /volume1/docker/ferretdb/state:/state
+  core:
+    image: ghcr.io/moghtech/komodo-core:latest
+    restart: unless-stopped
+    depends_on:
+      - ferretdb
+    ports:
+      - "${KOMODO_HOST_PORT}:${KOMODO_CONTAINER_PORT}"
+    volumes:
+      - /volume1/docker/komodo/backups:/backups
+  periphery:
+    image: ghcr.io/moghtech/komodo-periphery:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/proc
+      - ${PERIPHERY_ROOT_DIRECTORY}:${PERIPHERY_ROOT_DIRECTORY}
