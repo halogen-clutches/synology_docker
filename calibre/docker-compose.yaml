@@ -28,7 +28,7 @@ services:
       - flame.type=application
       - flame.name=Calibre
       - flame.url=${CALIBRE_FLAME_URL}
-      - flame.icon=dog
+      - flame.icon=penguin
       
   calibre-web:
     container_name: calibre-web 
