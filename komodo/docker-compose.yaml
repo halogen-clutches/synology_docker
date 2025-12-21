@@ -29,9 +29,11 @@ services:
       - "${POSTGRESDB_HOST_PORT}:${POSTGRESDB_CONTAINER_PORT}"
     volumes:
       - /volume1/docker/postgres/data:/var/lib/postgresql/data
+    env_file: 
+      - ./.env
   ferretdb:
     user: "1028:100"
-    # ߚ蠐in to a specific version. Updates can be breaking.
+    # set to a specific version. Updates can be breaking.
     # https://github.com/FerretDB/FerretDB/pkgs/container/ferretdb
     image: ghcr.io/ferretdb/ferretdb:2.7
     labels:
@@ -43,15 +45,20 @@ services:
       - "${FERRETDB_HOST_PORT}:${FERRETDB_CONTAINER_PORT}"
     volumes:
       - /volume1/docker/ferretdb/state:/state
+    env_file:
+      - ./.env 
   core:
     image: ghcr.io/moghtech/komodo-core:latest
     restart: unless-stopped
     depends_on:
       - ferretdb
+      - periphery
     ports:
       - "${KOMODO_HOST_PORT}:${KOMODO_CONTAINER_PORT}"
     volumes:
       - /volume1/docker/komodo/backups:/backups
+    env_file:
+      - ./.env
   periphery:
     image: ghcr.io/moghtech/komodo-periphery:latest
     restart: unless-stopped
@@ -59,3 +66,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /proc:/proc
       - ${PERIPHERY_ROOT_DIRECTORY}:${PERIPHERY_ROOT_DIRECTORY}
+    env_file:
+      - ./.env
