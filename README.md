@@ -1,11 +1,8 @@
 # synology-docker
 
-backup templates for my docker compose files for machine agnostic configs
-mostly notes for myself in case i come back to this 900 years later after setting everything up and a one and done and i forget everything (because i will haha)
-
-for all docker-compose files: 
-- replace pid&gid with user that has docker folder privileges doh
-- replace host_port & container_port with proper ports 
+komodo templates for my docker compose files
+- .env files locally on machine and backed up with hyperbackup 
+- location.env file because it's annoying to constantly specify timezone :) 
 
 ## handy commands
 for updates (if not using komodo): 
