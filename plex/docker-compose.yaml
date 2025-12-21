@@ -4,7 +4,7 @@ services:
     container_name: plex-media-server
     image: plexinc/pms-docker:latest
     env_file:
-      - /volume1/docker/komodo/periphery/location.env
+      - ../location.env
     environment:
       - TZ=${TZ}
       - PLEX_GID=100
