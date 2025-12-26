@@ -15,5 +15,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Actual
-      - flame.url=${FLAME_URL}
+      - flame.url=${ACTUAL_FLAME_URL}
       - flame.icon=duck
