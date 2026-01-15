@@ -9,6 +9,8 @@ services:
     volumes:
       - /volume1/docker/wallos/db:/var/www/html/db
       - /volume1/docker/wallos/logos:/var/www/html/images/uploads/logos
+    ports:
+      - "${HOST_PORT}:80/tcp"
     restart: unless-stopped
     labels:
       - flame.type=application
