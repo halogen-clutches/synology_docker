@@ -15,5 +15,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Wallos
-      - flame.url=${FLAME_URL}
+      - flame.url=${WALLOS_FLAME_URL}
       - flame.icon=dolphin
