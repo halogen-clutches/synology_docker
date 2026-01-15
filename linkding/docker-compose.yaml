@@ -23,5 +23,5 @@ services:
     labels:
       - flame.type=application
       - flame.name=Linkding
-      - flame.url=${FLAME_URL}
+      - flame.url=${LINKDING_FLAME_URL}
       - flame.icon=unicorn
