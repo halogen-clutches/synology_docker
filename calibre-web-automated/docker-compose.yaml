@@ -9,7 +9,7 @@ services:
       - HARDCOVER_TOKEN=${HARDCOVER_API_KEY}
       - NETWORK_SHARE_MODE=true
     volumes:
-      - /volume1/docker/calibre-web-automated/config:/config:rw
+      - /volume1/docker/calibre-web-automated/config:/config
       # This is an ingest dir, NOT a library one. Anything added here will be automatically added to your library according to the settings you have configured in CWA Settings page. All files placed here are REMOVED AFTER PROCESSING
       -  /volume1/docker/calibre-web-automated/ingest-temp:/cwa-book-ingest
       # If you don't have an existing library, CWA will automatically create one at the bind provided here
@@ -17,8 +17,3 @@ services:
     ports:
       - ${HOST_PORT}:8083
     restart: unless-stopped
-    labels:
-      - flame.type=application
-      - flame.name=Calibre-Web-A
-      - flame.url=${FLAME_URL}
-      - flame.icon=rabbit
