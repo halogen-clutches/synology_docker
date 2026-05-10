@@ -17,3 +17,9 @@ services:
     ports:
       - ${HOST_PORT}:8083
     restart: unless-stopped
+    labels:
+      - flame.type=application
+      - flame.name=Calibre-Web
+      - flame.url=${FLAME_URL}
+      - flame.icon=rabbit
+
