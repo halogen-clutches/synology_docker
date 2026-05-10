@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  romm:
+    image: rommapp/romm:latest
+    container_name: romm
+    restart: unless-stopped
+    user: 1028:100
+    environment:
+      - TZ={TZ}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWD=${DB_PASSWD}
+      - ROMM_AUTH_SECRET_KEY=${ROMM_AUTH_SECRET_KEY}
+      - SCREENSCRAPER_USER=${SCREENSCRAPER_PASSWORD}
+      - SCREENSCRAPER_PASSWORD=${SCREENSCRAPER_PASSWORD}
+      - RETROACHIEVEMENTS_API_KEY=${RETROACHIEVEMENTS_API_KEY}
+      - HASHEOUS_API_ENABLED=true 
+      - FLASHPOINT_API_ENABLED=true
+    volumes:
+      - /volume1/docker/romm/resources:/romm/resources 
+      - /volume1/docker/romm/redis-data:/redis-data 
+      - /volume1/data/games:/romm/library # Your game library. Check https://docs.romm.app/latest/Getting-Started/Folder-Structure/ for more details.
+      - /volume1/docker/romm/assets:/romm/assets 
+      - /volume1/docker/romm/config:/romm/config 
+    ports:
+      - ${HOST_PORT}:8080
+    depends_on:
+      romm-db:
+        condition: service_healthy
+        restart: true
+  romm-db:
+    image: mariadb:latest
+    container_name: romm-db
+    restart: unless-stopped
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_DATABASE=${DB_NAME}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_PASSWD}
+      - ROMM_AUTH_SECRET_KEY=${ROMM_AUTH_SECRET_KEY}
+    volumes:
+      - /volume1/docker/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
