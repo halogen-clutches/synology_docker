@@ -20,6 +20,6 @@ services:
     labels:
       - flame.type=application
       - flame.name=Calibre-Web
-      - flame.url=${FLAME_URL}
+      - flame.url=${CALIBRE_WEB_A_FLAME_URL}
       - flame.icon=rabbit
 
